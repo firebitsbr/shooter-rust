@@ -1,0 +1,6 @@
+# General
+/target
+Cargo.lock
+
+# Assets
+assets/**/*.png
