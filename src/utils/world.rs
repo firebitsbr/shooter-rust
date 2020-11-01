@@ -1,4 +1,5 @@
 use crate::components::Actor;
+use crate::components::Collision;
 use crate::components::Interpolation;
 use crate::components::Player;
 use crate::components::Terrain;
@@ -58,6 +59,8 @@ pub fn create_actor(
     if is_ghost {
         builder = builder.with(Tint(Srgba::new(0.6, 0.6, 0.6, 0.4)));
         builder = builder.with(Transparent);
+    } else {
+        builder = builder.with(Collision::Circle(0.225));
     }
 
     let actor = builder.build();

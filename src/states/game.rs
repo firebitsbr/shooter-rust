@@ -14,6 +14,7 @@ use crate::systems::net::InputSyncSystem;
 use crate::systems::net::InterpolationSystem;
 use crate::systems::net::NetworkSystem;
 use crate::systems::net::TransformSyncSystem;
+use crate::systems::CollisionSystem;
 use crate::systems::CameraSystem;
 use crate::systems::PlayerSystem;
 use crate::systems::TerrainSystem;
@@ -31,6 +32,7 @@ use amethyst::prelude::*;
 use amethyst::winit::DeviceEvent;
 use amethyst::winit::Event;
 use amethyst::winit::VirtualKeyCode;
+use amethyst::renderer::debug_drawing::DebugLines;
 use std::f32::consts::TAU;
 use std::net::SocketAddr;
 use std::sync::Arc;
@@ -67,6 +69,7 @@ impl GameState<'_, '_> {
         builder.add(PlayerSystem, "Player", &[]);
         builder.add(CameraSystem::new(), "Camera", &[]);
         builder.add(TerrainSystem, "Terrain", &[]);
+        builder.add(CollisionSystem, "Collision", &[]); // TODO: Optimize dispatching
 
         #[allow(clippy::unwrap_used)] // TODO: Remove
         match self.game_type {
@@ -105,6 +108,7 @@ impl GameState<'_, '_> {
     fn init_resources(&self, world: &mut World) {
         world.register::<Actor>();
         world.register::<Interpolation>();
+        world.insert(DebugLines::new());
         world.insert(EntityIndexMap::new());
         world.insert(GameTaskResource::new());
         world.insert(MessageResource::new());
@@ -129,6 +133,14 @@ impl GameState<'_, '_> {
             });
 
             tasks.push(GameTask::ActorGrant(public_id));
+
+            // TODO: Remove
+            tasks.push(GameTask::ActorSpawn {
+                public_id: 5,
+                x: 0.0,
+                y: 2.0,
+                angle: 0.0,
+            });
         }
 
         utils::world::create_terrain(world, root);
