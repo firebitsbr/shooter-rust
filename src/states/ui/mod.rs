@@ -1,9 +1,9 @@
-mod confirm;
+mod notify;
 mod home;
 mod new_game;
 mod quit;
 
-pub use self::confirm::*;
+pub use self::notify::*;
 pub use self::home::*;
 pub use self::new_game::*;
 pub use self::quit::*;

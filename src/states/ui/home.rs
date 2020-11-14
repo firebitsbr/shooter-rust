@@ -1,6 +1,6 @@
 use crate::resources::UiTask;
 use crate::resources::UiTaskResource;
-use crate::states::ui::ConfirmState;
+use crate::states::ui::NotifyState;
 use crate::states::ui::NewGameState;
 use crate::states::ui::QuitState;
 use crate::states::ui::UiState;
@@ -120,9 +120,11 @@ impl SimpleState for HomeState {
                 }
 
                 if Some(target) == self.button_disconnect {
-                    return Trans::Push(Box::new(ConfirmState::new(DISCONNECTION_TITLE, || {
-                        Trans::Replace(Box::new(HomeState::new(true)))
-                    })));
+                    return Trans::Push(Box::new(NotifyState::new_as_confirm(
+                        DISCONNECTION_TITLE,
+                        "Disconnect".to_string(),
+                        || Trans::Replace(Box::new(HomeState::new(true))),
+                    )));
                 }
 
                 if Some(target) == self.button_quit {

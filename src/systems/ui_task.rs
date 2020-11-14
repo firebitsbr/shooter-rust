@@ -64,7 +64,7 @@ impl<'a> System<'a> for UiTaskSystem {
                     }
                     UiTask::SetText(text_to_set) => {
                         if let Some(text) = text {
-                            text.text = text_to_set.to_string();
+                            text.text = text_to_set;
                         }
                     }
                 }

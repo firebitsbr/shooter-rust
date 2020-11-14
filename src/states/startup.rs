@@ -29,6 +29,7 @@ impl SimpleState for StartupState {
             creator.create("ui/confirm.ron", &mut self.progress);
             creator.create("ui/home.ron", &mut self.progress);
             creator.create("ui/new_game.ron", &mut self.progress);
+            creator.create("ui/notify.ron", &mut self.progress);
             creator.create("ui/quit.ron", &mut self.progress);
         });
 

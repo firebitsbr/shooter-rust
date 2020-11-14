@@ -1,7 +1,7 @@
 #![enable(implicit_some)]
 Container(
     transform: (
-        id: "confirm",
+        id: "notify",
         hidden: true,
         opaque: false,
         stretch: XY(
@@ -13,7 +13,7 @@ Container(
     children: [
         Container(
             transform: (
-                id: "confirm.wallpaper",
+                id: "notify.wallpaper",
                 z: 0.5,
                 width: 1.0,
                 height: 1.0,
@@ -66,7 +66,7 @@ Container(
                     children: [
                         Label(
                             transform: (
-                                id: "confirm.title",
+                                id: "notify.title",
                                 anchor: TopLeft,
                                 pivot: TopLeft,
                                 percent: true,
@@ -83,19 +83,40 @@ Container(
                                 color: (0.8, 0.8, 0.8, 1.0),
                             )
                         ),
+                        Label(
+                            transform: (
+                                id: "notify.details",
+                                anchor: TopLeft,
+                                pivot: TopLeft,
+                                percent: true,
+                                x: 0.0,
+                                y: -0.4,
+                                width: 1.0,
+                                height: 0.25,
+                                opaque: false,
+                            ),
+                            text: (
+                                text: "",
+                                font: File("fonts/regular.ttf", ("TTF", ())),
+                                font_size: 20.0,
+                                line_mode: Wrap,
+                                align: TopMiddle,
+                                color: (0.8, 0.8, 0.8, 0.3),
+                            )
+                        ),
                         Button(
                             transform: (
-                                id: "confirm.yes",
+                                id: "notify.button_1",
                                 anchor: TopLeft,
                                 pivot: TopLeft,
                                 percent: true,
                                 x: 0.35,
-                                y: -0.5,
+                                y: -0.6,
                                 width: 0.3,
                                 height: 0.05,
                             ),
                             button: (
-                                text: "Yes",
+                                text: "",
                                 font: File("fonts/regular.ttf", ("TTF", ())),
                                 font_size: 26.0,
                                 normal_text_color: (0.8, 0.8, 0.8, 1.0),
@@ -104,17 +125,17 @@ Container(
                         ),
                         Button(
                             transform: (
-                                id: "confirm.no",
+                                id: "notify.button_2",
                                 anchor: TopLeft,
                                 pivot: TopLeft,
                                 percent: true,
                                 x: 0.35,
-                                y: -0.55,
+                                y: -0.65,
                                 width: 0.3,
                                 height: 0.05,
                             ),
                             button: (
-                                text: "No",
+                                text: "",
                                 font: File("fonts/regular.ttf", ("TTF", ())),
                                 font_size: 26.0,
                                 normal_text_color: (0.8, 0.8, 0.8, 1.0),

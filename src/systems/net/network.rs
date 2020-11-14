@@ -36,10 +36,7 @@ impl NetworkSystem {
 
     pub fn new_as_client(server_address: SocketAddr) -> Result<Self, String> {
         let mut network = Self::new("0.0.0.0:0", false)?;
-        network
-            .connections
-            .insert(server_address, Connection::new());
-
+        network.connections.insert(server_address, Connection::new());
         network.send(&MessageReceiver::Every, Message::Greeting { id: 0 });
         return Ok(network);
     }
@@ -295,6 +292,8 @@ impl NetworkSystem {
             }
         }
     }
+
+    // pub fn is_failed()
 }
 
 impl<'a> System<'a> for NetworkSystem {

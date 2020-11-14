@@ -43,6 +43,7 @@ pub struct GameState<'a, 'b> {
     dispatcher: Option<Dispatcher<'a, 'b>>,
     player_actor: Option<Entity>,
     player_ghost: Option<Entity>,
+    temp_network: Option<NetworkSystem>,
 }
 
 pub enum GameType {
@@ -52,14 +53,29 @@ pub enum GameType {
 }
 
 impl GameState<'_, '_> {
-    pub fn new(game_type: GameType) -> Self {
-        return Self {
+    pub fn new(game_type: GameType) -> Result<Self, String> {
+        let temp_network;
+
+        match game_type {
+            GameType::Single => {
+                temp_network = None;
+            }
+            GameType::Join(address) => {
+                temp_network = Some(NetworkSystem::new_as_client(address)?);
+            }
+            GameType::Host(port) => {
+                temp_network = Some(NetworkSystem::new_as_server(port)?);
+            }
+        }
+
+        return Ok(Self {
             game_type,
             root: None,
             dispatcher: None,
             player_actor: None,
             player_ghost: None,
-        };
+            temp_network,
+        });
     }
 
     fn init_dispatcher(&mut self, world: &mut World) {
