@@ -52,6 +52,9 @@ use amethyst::ui::RenderUi;
 use amethyst::ui::UiBundle;
 use amethyst::utils::application_root_dir;
 
+#[macro_use]
+extern crate bitflags;
+
 const FRAME_RATE: u32 = 144;
 
 fn main() -> amethyst::Result<()> {

@@ -47,7 +47,7 @@ pub fn create_actor(
     let mut builder = world
         .create_entity()
         .with(Parent { entity: root })
-        .with(Actor)
+        .with(Actor::new())
         .with(transform)
         .with(Interpolation::new());
 
